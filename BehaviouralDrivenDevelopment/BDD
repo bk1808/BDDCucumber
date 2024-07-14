@@ -1,0 +1,415 @@
+About Gherkin language: 
+
+2. What are the key components of a Gherkin file?
+ - Gherkin files typically consist of feature, scenario, scenario outline, Given-When-Then steps, and tags.
+
+3. Explain the structure of a Gherkin scenario.
+ - A Gherkin scenario consists of three parts: Given, When, and Then. "Given" sets up the initial state, "When" describes the action taken, and "Then" specifies the expected outcome or result.
+
+4. What is the purpose of tags in Gherkin?
+ - Tags are used to label scenarios or features, making it easier to organize and filter them. They can be used for various purposes, such as grouping related scenarios or marking scenarios for specific test runs.
+
+5. What are scenario outlines, and when do you use them?
+ - Scenario outlines are used when you have a scenario that follows a similar structure but with different input values. They are a way to create data-driven tests in Gherkin.
+
+6. Explain the difference between "Background" and "Scenario" in Gherkin.
+ - "Background" is used to define steps that are common to all scenarios in a feature file, while "Scenario" is used to define a specific test case or scenario.
+
+7. How do you write comments in a Gherkin file?
+ - Comments in Gherkin are written with the "#" symbol at the beginning of a line.
+
+8. What are the best practices for writing effective Gherkin scenarios?
+ - Some best practices include using clear and concise language, avoiding technical details, and focusing on the behavior being tested. Scenarios should be independent and not rely on the order of execution.
+
+9. Explain how Gherkin scenarios are transformed into executable tests.
+ - Gherkin scenarios are typically associated with a test automation framework like Cucumber, which provides step definitions that map Gherkin steps to actual code. These step definitions are implemented to execute the tests.
+
+Chapter-1: BDD cucumber
+TLD, TDD, and BDD, differences - introduction to BDD
+
+> It's a software development process that's used in Agile processes, it's iterative process
+which has 3 steps of iterations:
+Discovery - Finding out, What it could do
+Formulation - What it should do
+Automation - What it actually does
+
+TLD & TDD are the predecessors of BDD
+1. TLD - Test Last Development: Testing is done at the very end of the development process
+Coding > Test creation [It's old, and is similar to Waterfall model]. Once the coding is ready we will perform
+testing
+2. TDD - Test Driven Development: Test creation is done first and the development of coding 
+Test creation > Coding 
+Here, developers are going to create test with the sole idea of matching the required behaviour of the
+code. Then, they develop the code with the intention that the test has to pass. Here, we test the code step-by-step and refine code to develop
+the actual code. Incremental process step-by-step
+TDD related to BDD, in TDD the first thing we do is we create the tests, when we execute the
+tests they will fail, and then we write require code for it, if the code is not enough if it's failing again and again and 
+then we add some Refractive tests [refinement] this process will continue until the entire application is built
+Test creation > Test fails > Coding > Refractive tests. It's tedious but helps us get the quality software
+3. BDD - Behavioural Driven Development, it's the extension of TDD where TDD focusses more on the coding and development of the application
+wherein BDD focuses more on the behaviour of the application. In TDD only tech team will participate wherein
+in BDD incorporates everyone in the team which includes, developers, testers, stakeholders etc..
+TDD is an incremental procedure wherein BDD is an iterative procedure
+
+Chapter-2: Introduction to cucumber and gherkin: Syntax, how to write user story feature file, structure, example
+for feature file.
+BDD - CUCUMBER
+To implement BDD in our process we have multiple tools:
+> Cucumber [popular], can be used along with selenium and Java
+> Behave
+> JBehave
+> Specflow
+
+What is Cucumber?
+A: It's a tool or it can also be called as framework, this helps implement BDD. Alone, it will not helpd us 
+automate, it provides a framework using which we can implement BDD in project. To work on Cucumber we need to know Gherkin language, cucumber involves everyone becuase, it uses simple language to perform testing
+
+Cucumer provides you a framework using which you can implement BDD in your project 
+
+What is Gherkin language?
+A: It's a parsable language, and simple to use, it uses a combination of given(), when(), then()
+1. What is Gherkin, and what is its primary purpose?
+ - Gherkin is a language used to write executable specifications in a human-readable format. Its primary purpose is to define the behavior of a software application in a way that non-technical stakeholders can understand.
+To use this gherkin we have few keywords:
+1. GIVEN - pre-condition 
+2. WHEN - action to perform
+3. AND - Concatination, if  you have a multiple pre-conditions to add in single line
+4. THEN - Validation
+
+Given: It works as a pre-condition, where the initial details/data needs to be ready beforehand
+Ex: Browser is open, URL is launched etc.
+When: It's used to perform some action
+And: It acts as a concatination, it will help us to write concatinate the script
+Then: It's used to provide validation
+Ex: User is successfully loggedin, product is added successfully
+
+Where these keywords are used and what is the layout? How to write a user story?
+A: It's the smaller chunk of the entire requirement. 
+> Login is a user story - scenario: User should be loggedin using valid credentials
+So, here one user story can be considered as one 'FEATURE' & SCENARIO. To covert this scenario we will use the
+Gerkin language keywords[given, when, then] when we combine everything we get a Feature file.
+
+How to write a user story?
+A: It's a smaller chunk of the entire requirement
+Feature: [one user story is equal to one feature]
+Login: 
+Scenario: User should be logged in using valid credentials
+
+To convert this into test steps, we will use gherkin language using the keywords such as:
+GIVEN, WHEN, AND, THEN. If we combine these all and the test steps, we get feature file. 
+
+This feature file we will develop in the Eclipse IDE.
+
+How to create a feature file? [practicle]
+
+Before we perform any practicle, we need to install the cucumber eclipse plugin on
+Eclipse market place, after installation the eclipse will restart. Right click on
+the Maven project and navigate to Configure option under 'File', click on Convert to cucumber project option
+this will create a cucumber feature file and convert the project to Maven-cucumber. You will see cucumber feature file
+
+Feature file will have a pre-defined structure:
+
+Feature: 
+Scenario:   
+Given
+And
+When
+And
+Then
+And
+
+Examples: to pass the value in the run time [if we are using thid keyword
+then our Scenario: keyword should be changed as Scenario Outline: ]
+
+=============
+This feature file is easy to understand, and it helps anyone understand 
+BDD incorporates of the application in such as where all the memeber can come together, such as developers, testers, stakeholders etc.
+
+Chapter-3: Instroduction to step defenition
+
+> What is glue code? syntax, introduction to annotations, implementing selenium code n step defenition file
+
+What is glue-code? How to provide the glue-code?
+[every step defenition file is considered as glue code]
+A: Glue-code In Behavior-Driven Development (BDD), it's
+also known as fixtures, connects higher-level specifications to
+implementation details. BDD tools often encourage writing behavior
+specifications as constrained natural text, such as
+in Given...When...Then format. Glue code then connects to the
+underlying implementation i.e. Selenium script for the execution purpose.
+
+Whenever we execute the feature file directly, we get 'ClassNotFound' exception
+this is beacause there are no dependancies present which will help us access cucumber classes or any of the annotations
+
+There are few dependencies we must use in BDD are: 
+1. Cucumber code-JVM [it is responsibel to give all the APi's needed that is related to Cucumber]
+2. Cucumber Java [it is responsible to import all APi's that are needed for Cucumber and java work together]
+3. TestNG unit testing tool installation
+4. Cucumber JVM testNG 
+5. Selenium automation dependency to automate GUI
+
+Undefined scenarios: The implementation for the scenario steps is missing, i.e. glue-code [also called as step defenition]
+ 
+Step defenition: Glue code is also called as step defenition wherein we need to provide the 
+defenition for the snippet steps that's nothing but your step defenition
+
+For every step we write in the feature file using BDD keywords we will get the snippets in return when we execute the feature file 
+once we receive these snippets in the console we need to copy them and paste in your project under src/test/java 
+create a new package called 'stepDefenitions' and create a class for Login feature and provide the glue-code 
+Once after pasting the output of feature file we'll find the annotation errors, these needs to be resolved by importing them from io.cucumber.java package
+> If the glue code is not present for the feature file, then we will see the steps in 'yellow' color and they describe there's no proper implementation in its step defenition for
+that is the reason they will be highlighted. Once we give proper implementation and after running the feature file these highlight marks will be gone
+> Every annotation should have a method declaration if we want to use them
+> Provide the implementation for every snippet that are present in Login class.
+> Once the glue-code for the feature file steps is provided all the highlights will be vanished from feature file.
+> During the execution the, the feature file will look for the glue-code under the 
+step-defenitions package automatically and whichever class has the given attribute("") of steps
+it will automatically pickup the script present in the method for execution purpose
+this will continue for all the steps present in that feature file. Hence, whatever statement we give in the feature file must 
+match with the snippet's annotation attribute
+
+Ex: for the first step 'Browser is open and URL is navigated'
+below is the method along with annotation which has attribute in the step-defenition
+
+@Given("Browser is open and URL is navigated")
+	public void browser_is_open_and_url_is_navigated() {
+		/* this is called a glue-code which provide the implementation for the feature file step specification*/
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.get("https://demowebshop.tricentis.com/");
+	
+	}
+
+We can have multiple feature file and multiple feature files can have 
+multiple step defenitions through a centralised place which is called 'Runner class'
+
+Chapter-4:Cucumber runner class
+
+1. Introduction to Runner class:
+- Runner Class
+- Cucmber Options annotation
+- Cucumber Options Attributes
+2. Report generation using plugin:
+- HTML & JSON reports
+- Extent reports
+
+What is the runner class and where it's used?
+A: It's a centralized place to execute feature files, if there are multiple feature files under a package
+you have to execute individually instead we use runner class where by executing the runner class we can execute all
+the feature file at one go present in the project. 
+
+Runner class will automatically combine feature files with step-defenition without any extra coding required
+this is the advantage of Runner class, it can be integrated with either JUnit or testNG 
+
+To create a runner class we need to create a package under src/test/java
+> Create a package with name 'Runner'
+> Create a class file with name 'CucumberRunner' 
+> Cucumber Options annotation: It's an annotation that we get from CucumberTestNG <dependency that we have added> 
+> You need to use this annotation before the class name @CucumberOptions which will import from testNG package
+> @CucumberOptions this annotation is responsibe to glue together the feature files and step-defenition. It's also
+responsible to give you attributes which will help you develop different kinds of reporting
+
+The attributes present in CucumberOptions are:
+a. dryRun
+b. extraGlue
+c. features [IMP]
+d. glue
+e. monochrome
+f. name
+g. objectFactory
+h. plugin
+i. publish
+j. snippets
+k. tags
+l. uuidGenerator
+
+1. features - along with this attribute you need to provide the location or path of the feature file
+2. glue - along with 'features' attribute you need to provide the step-defenition file package name
+here, every step-defenition file is considered as glue-code
+3. Now, extend the Runner class to AbstractTestNGCucumberTests class. This class is responsible to pick-up
+each and every feature file for execution. 
+
+AbstractTestNGCucumberTests class - Runs each cucumber scenario found in the features as separated test
+
+4. Once after above steps, run the 'Runner' class as TestNG test
+5. After implementing these steps, we will be able to execute our feature files as testNG tests 
+6. Feature file will execute after taking the step-defenition as its backend code
+7. If there are multiple feature files in the same package provide the path of the package and execute
+
+How to generate multiple reports using cucumber runner?
+
+A: By using plugins such as HTML, JSON as well as Extent Reports.
+
+When we have a regression suite running, this suite will have multiple test cases in it
+TC_01, TC_02, ... every test case right after the execution will give the report this report will contains attributes such as
+how many test cases are there, passed test cases, skipped test cases, failed test cases, exceptions for the failed test cases
+these are the details we are able to witness in the testNG emailable HTML report which is not 
+in detail
+
+How to generate HTML cucumber report?
+
+A: In CucumberRunner' class there's an attribute called 'plugin'{}
+inside the plugin attribute provide which kind report you want and where you want to store the report 
+
+plugin = {"html:Reports/CucumberReport.html"}
+
+which will create a new HTML file inside the Reports' folder in eclipse
+
+How to generate JSON report using Cucumber plugin?
+
+A: plugin = {"json:Reports/CucumberJSONReport.json"}
+
+Once after providing the path execute the Runner class and the report will be generated 
+
+Extent reports:
+
+It provide more advanced in detail report so we need to add the 'Avenstack extent report'
+choose the dependency and add it to POM.XML file along with that we also we need to
+add one more dependency because, extent report will not accept the feature 
+file format directly similar to selenium script. We need adapter dependency between feature file
+and extent report [ExtentReports Cucumber7 Adapter » 1.14.0]
+add the dependency and in the runner class at @CucumberOptions annotation provide
+a usage syntax available in extent reports official page 'com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:'
+After adding this attribute, we need to provide the path/location of the report where the extent 
+report to be stored so we need to create a properties file in src/test/resources folder
+and create a .html file configuration
+
+Chapter-5: DDT part-1 code reusability
+
+How we can write multiple scenarios in the same feature file?
+How code reusability is possible in BDD?
+How one scenario can accept multiple values?
+
+Login module: shooper login, admin login, merchant login modules which are present
+in one user sign-in page
+
+To covnvert these modules into feature file, we have option of writing multiple scenarios
+in the same feature file.
+
+Practical:
+Create a Shopperstack login feature file and step defenition file
+whereever there's a need for input or data to be entered create a string and 
+pass the value in feature file and run the feature file to get the method with 
+{string} variables and we can implement the same on step-defenition-file
+
+refer to step defenition class: ShopperstackLogin.class
+
+Chapter-6: DDT pat-2 Scenario Outline and Data tables
+
+DDT in cucumber BDD is different from selenium, we will not use @Dataprovider 
+annotation, instead we will use a Keyword called 'Scenario outline' and 'Data tables'
+
+in feature file we do not hard-code the data instead we go for 'scenario outline' at run-time we pass
+the data through feature file.
+
+In the step defenition file we pass the variable as input and actual input we pass 
+it through feature file in the run time
+
+To pass multiple set of data in the feature file, we have to put the data or value that we are passing should be in 
+"<Search text>" angular braces to pass the data we need to use a Keyword called
+
+Examples: we can create our own tabular form
+
+| Search text |
+| Computer    |
+| Books       |
+
+Change the Scenario: keyword to Scenario Outline:
+
+Now based on the Examples: the number of values that we have passed, the
+test script will get executed so many number of times as @Dataprovider
+
+If we are passing the data other than String, such as int or boolean we need to follow
+regular expression RegEx within the step defenition file methods
+
+ 
+Chapter-7 Data tables
+
+Instead of hrad coding the data through feature file we need to provide the 
+details within the feature file steps, provide values in one row
+
+so values present in one row will be break down into multiple columns 
+
+| M | Test | manualtest | qs_manualtest@gmail.com | Password@123 | //row & column
+
+the above values are singe dimentional where it's considered as single row 
+
+if we are adding values of multiple rows then the rows become two dimensional
+
+Chapter-8 Cucumber tags and Background keyword
+
+1. Cucumber tags
+2. Background keyword
+
+under the runner file i have provided all the feature files which will run all at once
+what if there are multiple feature files like more than 50 and if assuming
+feature files having multiple scenarios then running perticualr feature file and scenario
+becomes difficult, so for that we use Cucumber @tags [it's a cucumber feature] wherein you can tag
+each scenario to a perticular tag and you can execute only the @tag that we want
+
+So, before each scenario provide the @tag and name it as per the scenario or @Smoke @Regression etc.
+you can provide tags in each feature file and to all the scenarios. Using these tags
+we can make sure in runner class we can execute only the tags that i want. 
+
+Usage of "Background:" keyword it's used to provide the pre-condition of the scenario where the steps 
+might have been repeated in the scenarios to avoid the recurring steps we
+will use the Background: keyword and provide those common steps across the scenarios
+
+Background: keyword is applicable to only perticular to one feature and all the scenarios related to it.
+
+Chapeter - 9 Hook class dry run attribute
+
+Hook class/Hooks
+Dry Run
+
+Create a new package for storing Hook. under src/test/java
+
+In the Hook class we provide the pre-condition and post-condition for all the scenarios
+
+To provide pre-condition we need to use @Before annotation from Cucumber JAVA,
+after the @Before annotation we need to create a method 
+
+
+To provide post-condition we need to use @After annotation from Cucumber JAVA,
+after the @After annotation we need to create a method
+
+Every time we execute the feature file Hoos is going to execute 
+
+It's exactly similar to Baseclass in BDD framework
+
+The difference between Background and Hook:
+
+//@Before-->Background: --> Scenario: --> @After
+
+//Once the @Before annotation exectes --> then the Background of the feature file will execute -->
+then, scenario will execute after the scenario execution @After annotation will execute
+
+Background is applicable to feature file and all the scenarios present in that feature file
+
+Hook class annotations present in the class are applicable to all feature files, all scenarios present in that project
+
+Even if we run the Cucumber runner class, it will be able to execute @Before and @After methods, to do that we have the 'glue' attribute present in the cucumber runner class
+based on the 'Hook' package same similar to how we have provided 'feature' & 'step definition' package name within the 'glue' attribute 
+
+How to provide specific pre-condition in Hook class using @Before annotation:
+
+If the scenario says that, we need to login before searching the product in ecommerse application
+in that case we need to create a @tag for that scenario
+
+>> In the runner class we have a special and very important attribute called 'dryRun'
+
+'dryRun' accepts boolean value, there might be multiple feature files created
+but all those feature files may not have step-definition presence. If we want
+to know which feature file has step-definition which doesn't that's where 
+'dryRun' comes into picture 
+
+when we execute using 'dryRun' attribute it will not launch the browser for execution because
+dryRun will compare the feature file steps with the step defenitions, if the steps are 
+implemented then it will run the feature files as usual, if the steps are not implemented in step
+definition in any of the class we get 'UndefinedStepException' whichever feature file steps are 
+not implemented provide the implementation in relevant step-definition class  
+
+
+
+ 
